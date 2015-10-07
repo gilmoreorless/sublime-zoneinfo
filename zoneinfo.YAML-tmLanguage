@@ -1,0 +1,60 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+---
+name: zoneinfo
+scopeName: text.zoneinfo
+fileTypes:
+- africa
+- antarctica
+- asia
+- australasia
+- backward
+- backzone
+- etcetera
+- europe
+- factory
+- northamerica
+- pacificnew
+- southamerica
+- systemv
+uuid: 6f25ec5b-a532-479a-841d-596ff7c820b3
+
+patterns:
+- comment: Line comments
+  name: comment.line.number-sign.zoneinfo
+  match: \#.*$\n?
+
+- comment: Zone definitions
+  name: meta.zone.zoneinfo
+  # Zone  Africa/Algiers  0:12:12 - LMT 1891 Mar 15  0:01
+  match: |
+    (?x)
+    ^(Zone)?          # "Zone"
+    \s+([\w+\-\/]+)?   # Zone name
+    \s+([\d:]+)       # UTC offset
+    \s+([\w\-]+)       # Rules
+    \s+([\w%]+)        # Format
+  captures:
+    '1': {name: storage.type.zone.zoneinfo}
+    '2': {name: entity.name.zone.zoneinfo}
+    '3': {name: constant.numeric.time.zoneinfo}
+    '4': {name: storage.type.rule.zoneinfo}
+    '5': {name: variable.other.format.zoneinfo}
+
+- comment: Rule defintions
+  name: meta.rule.zoneinfo
+  match: ^Rule\b
+
+- comment: Link definitions
+  name: meta.link.zoneinfo
+  begin: ^(Link)\b
+  beginCaptures:
+    '1': {name: storage.type.link.zoneinfo}
+  end: $
+  patterns:
+  - include: '#zonename'
+
+repository:
+  zonename:
+    match: \b[\w+\-\/]+\b
+    name: entity.name.zone.zoneinfo
+...

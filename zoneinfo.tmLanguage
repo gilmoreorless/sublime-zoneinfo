@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array>
+		<string>africa</string>
+		<string>antarctica</string>
+		<string>asia</string>
+		<string>australasia</string>
+		<string>backward</string>
+		<string>backzone</string>
+		<string>etcetera</string>
+		<string>europe</string>
+		<string>factory</string>
+		<string>northamerica</string>
+		<string>pacificnew</string>
+		<string>southamerica</string>
+		<string>systemv</string>
+	</array>
+	<key>name</key>
+	<string>zoneinfo</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>comment</key>
+			<string>Line comments</string>
+			<key>match</key>
+			<string>\#.*$\n?</string>
+			<key>name</key>
+			<string>comment.line.number-sign.zoneinfo</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.zone.zoneinfo</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.zone.zoneinfo</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric.time.zoneinfo</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.rule.zoneinfo</string>
+				</dict>
+				<key>5</key>
+				<dict>
+					<key>name</key>
+					<string>variable.other.format.zoneinfo</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>Zone definitions</string>
+			<key>match</key>
+			<string>(?x)
+^(Zone)?          # "Zone"
+\s+([\w+\-\/]+)?   # Zone name
+\s+([\d:]+)       # UTC offset
+\s+([\w\-]+)       # Rules
+\s+([\w%]+)        # Format
+</string>
+			<key>name</key>
+			<string>meta.zone.zoneinfo</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Rule defintions</string>
+			<key>match</key>
+			<string>^Rule\b</string>
+			<key>name</key>
+			<string>meta.rule.zoneinfo</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>^(Link)\b</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.link.zoneinfo</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>Link definitions</string>
+			<key>end</key>
+			<string>$</string>
+			<key>name</key>
+			<string>meta.link.zoneinfo</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#zonename</string>
+				</dict>
+			</array>
+		</dict>
+	</array>
+	<key>repository</key>
+	<dict>
+		<key>zonename</key>
+		<dict>
+			<key>match</key>
+			<string>\b[\w+\-\/]+\b</string>
+			<key>name</key>
+			<string>entity.name.zone.zoneinfo</string>
+		</dict>
+	</dict>
+	<key>scopeName</key>
+	<string>text.zoneinfo</string>
+	<key>uuid</key>
+	<string>6f25ec5b-a532-479a-841d-596ff7c820b3</string>
+</dict>
+</plist>
