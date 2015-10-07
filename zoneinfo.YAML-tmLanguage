@@ -21,18 +21,17 @@ uuid: 6f25ec5b-a532-479a-841d-596ff7c820b3
 patterns:
 - comment: Line comments
   name: comment.line.number-sign.zoneinfo
-  match: \#.*$\n?
+  match: \#.*$
 
 - comment: Zone definitions
   name: meta.zone.zoneinfo
-  # Zone  Africa/Algiers  0:12:12 - LMT 1891 Mar 15  0:01
   match: |
     (?x)
     ^(Zone)?          # "Zone"
-    \s+([\w+\-\/]+)?   # Zone name
-    \s+([\d:]+)       # UTC offset
-    \s+([\w\-]+)       # Rules
-    \s+([\w%]+)        # Format
+    \s+([\w+\-\/]+)?  # Zone name
+    \s+([\d:\-]+)     # UTC offset
+    \s+([\w:\-]+)     # Rules
+    \s+([\w%]+)       # Format
   captures:
     '1': {name: storage.type.zone.zoneinfo}
     '2': {name: entity.name.zone.zoneinfo}
@@ -51,10 +50,24 @@ patterns:
     '1': {name: storage.type.link.zoneinfo}
   end: $
   patterns:
+  - include: '#comment'
   - include: '#zonename'
 
+- comment: Time values
+  name: constant.numeric.time.zoneinfo
+  patterns:
+  - include: '#time'
+
 repository:
+  comment:
+    name: comment.line.number-sign.zoneinfo
+    match: \#.*$
   zonename:
     match: \b[\w+\-\/]+\b
     name: entity.name.zone.zoneinfo
-...
+  rulename:
+    match: \b[A-Za-z_]+\b
+    name: string.name.rule.zoneinfo
+  time:
+    match: \b-?\d+(:\d+)+\b
+    name: constant.numeric.time.zoneinfo

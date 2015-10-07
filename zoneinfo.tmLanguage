@@ -26,7 +26,7 @@
 			<key>comment</key>
 			<string>Line comments</string>
 			<key>match</key>
-			<string>\#.*$\n?</string>
+			<string>\#.*$</string>
 			<key>name</key>
 			<string>comment.line.number-sign.zoneinfo</string>
 		</dict>
@@ -64,10 +64,10 @@
 			<key>match</key>
 			<string>(?x)
 ^(Zone)?          # "Zone"
-\s+([\w+\-\/]+)?   # Zone name
-\s+([\d:]+)       # UTC offset
-\s+([\w\-]+)       # Rules
-\s+([\w%]+)        # Format
+\s+([\w+\-\/]+)?  # Zone name
+\s+([\d:\-]+)     # UTC offset
+\s+([\w:\-]+)     # Rules
+\s+([\w%]+)       # Format
 </string>
 			<key>name</key>
 			<string>meta.zone.zoneinfo</string>
@@ -101,13 +101,51 @@
 			<array>
 				<dict>
 					<key>include</key>
+					<string>#comment</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#zonename</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Time values</string>
+			<key>name</key>
+			<string>constant.numeric.time.zoneinfo</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#time</string>
 				</dict>
 			</array>
 		</dict>
 	</array>
 	<key>repository</key>
 	<dict>
+		<key>comment</key>
+		<dict>
+			<key>match</key>
+			<string>\#.*$</string>
+			<key>name</key>
+			<string>comment.line.number-sign.zoneinfo</string>
+		</dict>
+		<key>rulename</key>
+		<dict>
+			<key>match</key>
+			<string>\b[A-Za-z_]+\b</string>
+			<key>name</key>
+			<string>string.name.rule.zoneinfo</string>
+		</dict>
+		<key>time</key>
+		<dict>
+			<key>match</key>
+			<string>\b-?\d+(:\d+)+\b</string>
+			<key>name</key>
+			<string>constant.numeric.time.zoneinfo</string>
+		</dict>
 		<key>zonename</key>
 		<dict>
 			<key>match</key>
