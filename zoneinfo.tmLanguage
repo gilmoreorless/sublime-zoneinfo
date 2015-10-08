@@ -25,10 +25,15 @@
 		<dict>
 			<key>comment</key>
 			<string>Line comments</string>
-			<key>match</key>
-			<string>\#.*$</string>
 			<key>name</key>
 			<string>comment.line.number-sign.zoneinfo</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#comment</string>
+				</dict>
+			</array>
 		</dict>
 		<dict>
 			<key>captures</key>
@@ -51,7 +56,7 @@
 				<key>4</key>
 				<dict>
 					<key>name</key>
-					<string>storage.type.rule.zoneinfo</string>
+					<string>entity.name.rule.zoneinfo</string>
 				</dict>
 				<key>5</key>
 				<dict>
@@ -67,18 +72,61 @@
 \s+([\w+\-\/]+)?  # Zone name
 \s+([\d:\-]+)     # UTC offset
 \s+([\w:\-]+)     # Rules
-\s+([\w%]+)       # Format
+\s+([\w%+\-]+)    # Format
 </string>
 			<key>name</key>
 			<string>meta.zone.zoneinfo</string>
 		</dict>
 		<dict>
+			<key>begin</key>
+			<string>^(Rule)\s+([\w:\-]+)\b</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.rule.zoneinfo</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.rule.zoneinfo</string>
+				</dict>
+			</dict>
 			<key>comment</key>
 			<string>Rule defintions</string>
-			<key>match</key>
-			<string>^Rule\b</string>
+			<key>end</key>
+			<string>\s([A-Za-z]+)?(\s*(\#.*))?$</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.other.format.zoneinfo</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>comment.line.number-sign.zoneinfo</string>
+				</dict>
+			</dict>
 			<key>name</key>
 			<string>meta.rule.zoneinfo</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#comment</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#time</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#year</string>
+				</dict>
+			</array>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -122,29 +170,65 @@
 				</dict>
 			</array>
 		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Year values</string>
+			<key>name</key>
+			<string>constant.numeric.year.zoneinfo</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#year</string>
+				</dict>
+			</array>
+		</dict>
 	</array>
 	<key>repository</key>
 	<dict>
 		<key>comment</key>
 		<dict>
-			<key>match</key>
-			<string>\#.*$</string>
+			<key>begin</key>
+			<string>\#</string>
+			<key>end</key>
+			<string>$</string>
 			<key>name</key>
 			<string>comment.line.number-sign.zoneinfo</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#url</string>
+				</dict>
+			</array>
 		</dict>
-		<key>rulename</key>
+		<key>date</key>
 		<dict>
 			<key>match</key>
-			<string>\b[A-Za-z_]+\b</string>
+			<string>\b\d{4}(-\d{2}){2}\b</string>
 			<key>name</key>
-			<string>string.name.rule.zoneinfo</string>
+			<string>constant.numeric.date.zoneinfo</string>
 		</dict>
 		<key>time</key>
 		<dict>
 			<key>match</key>
-			<string>\b-?\d+(:\d+)+\b</string>
+			<string>\b-?((\d+(:\d+)+)|0\b)</string>
 			<key>name</key>
 			<string>constant.numeric.time.zoneinfo</string>
+		</dict>
+		<key>url</key>
+		<dict>
+			<key>match</key>
+			<string>\b[A-Za-z]+:\/\/\S*?\.\S*\b</string>
+			<key>name</key>
+			<string>string.other.link.zoneinfo</string>
+		</dict>
+		<key>year</key>
+		<dict>
+			<key>match</key>
+			<string>\b\d{4}\b</string>
+			<key>name</key>
+			<string>constant.numeric.year.zoneinfo</string>
 		</dict>
 		<key>zonename</key>
 		<dict>

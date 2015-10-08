@@ -21,7 +21,8 @@ uuid: 6f25ec5b-a532-479a-841d-596ff7c820b3
 patterns:
 - comment: Line comments
   name: comment.line.number-sign.zoneinfo
-  match: \#.*$
+  patterns:
+  - include: '#comment'
 
 - comment: Zone definitions
   name: meta.zone.zoneinfo
@@ -31,17 +32,28 @@ patterns:
     \s+([\w+\-\/]+)?  # Zone name
     \s+([\d:\-]+)     # UTC offset
     \s+([\w:\-]+)     # Rules
-    \s+([\w%]+)       # Format
+    \s+([\w%+\-]+)    # Format
   captures:
     '1': {name: storage.type.zone.zoneinfo}
     '2': {name: entity.name.zone.zoneinfo}
     '3': {name: constant.numeric.time.zoneinfo}
-    '4': {name: storage.type.rule.zoneinfo}
+    '4': {name: entity.name.rule.zoneinfo}
     '5': {name: variable.other.format.zoneinfo}
 
 - comment: Rule defintions
   name: meta.rule.zoneinfo
-  match: ^Rule\b
+  begin: ^(Rule)\s+([\w:\-]+)\b
+  beginCaptures:
+    '1': {name: storage.type.rule.zoneinfo}
+    '2': {name: entity.name.rule.zoneinfo}
+  end: \s([A-Za-z]+)?(\s*(\#.*))?$
+  endCaptures:
+    '1': {name: variable.other.format.zoneinfo}
+    '3': {name: comment.line.number-sign.zoneinfo}
+  patterns:
+  - include: '#comment'
+  - include: '#time'
+  - include: '#year'
 
 - comment: Link definitions
   name: meta.link.zoneinfo
@@ -58,16 +70,30 @@ patterns:
   patterns:
   - include: '#time'
 
+- comment: Year values
+  name: constant.numeric.year.zoneinfo
+  patterns:
+  - include: '#year'
+
 repository:
   comment:
     name: comment.line.number-sign.zoneinfo
-    match: \#.*$
+    begin: \#
+    end: $
+    patterns:
+    - include: '#url'
+  url:
+    name: string.other.link.zoneinfo
+    match: \b[A-Za-z]+:\/\/\S*?\.\S*\b
   zonename:
     match: \b[\w+\-\/]+\b
     name: entity.name.zone.zoneinfo
-  rulename:
-    match: \b[A-Za-z_]+\b
-    name: string.name.rule.zoneinfo
   time:
-    match: \b-?\d+(:\d+)+\b
+    match: \b-?((\d+(:\d+)+)|0\b)
     name: constant.numeric.time.zoneinfo
+  date:
+    match: \b\d{4}(-\d{2}){2}\b
+    name: constant.numeric.date.zoneinfo
+  year:
+    match: \b\d{4}\b
+    name: constant.numeric.year.zoneinfo
