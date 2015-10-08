@@ -22,8 +22,8 @@ fileTypes:
 # to avoid matching unrelated files in other projects
 - iso3166.tab
 - leap-seconds.list
-# - zone.tab
-# - zone1970.tab
+- zone.tab
+- zone1970.tab
 
 uuid: 6f25ec5b-a532-479a-841d-596ff7c820b3
 
@@ -72,7 +72,7 @@ patterns:
   end: $
   patterns:
   - include: '#comment'
-  - include: '#zonename'
+  - include: '#zonename_loose'
 
 - comment: Leap second definitions
   name: meta.leap.zoneinfo
@@ -84,6 +84,18 @@ patterns:
   - include: '#comment'
   - include: '#time'
   - include: '#year'
+
+- comment: zone.tab lines
+  name: meta.zonetab.zoneinfo
+  begin: ^([A-Z]{2})\b
+  beginCaptures:
+    '1': {name: variable.other.country.zoneinfo}
+  end: $
+  patterns:
+  - include: '#comment'
+  - include: '#isocountry'
+  - include: '#latlng'
+  - include: '#zonename'
 
 - comment: Time values
   name: constant.numeric.time.zoneinfo
@@ -105,9 +117,15 @@ repository:
   url:
     name: string.other.link.zoneinfo
     match: \b[A-Za-z]+:\/\/\S+?\.\S+?(?=[>\s\]])
-  zonename:
+  zonename_loose:
     match: \b[\w+\-\/]+\b
     name: entity.name.zone.zoneinfo
+  zonename:
+    match: \b[\w+\-]+(\/[\w+\-]+)+\b
+    name: entity.name.zone.zoneinfo
+  isocountry:
+    match: \b[A-Z]{2}\b
+    name: variable.other.country.zoneinfo
   time:
     match: \b-?((\d+(:\d+)+)|0\b)
     name: constant.numeric.time.zoneinfo
@@ -117,3 +135,6 @@ repository:
   year:
     match: \b\d{4}\b
     name: constant.numeric.year.zoneinfo
+  latlng:
+    match: ([+\-]\d{4,}){2}
+    name: constant.numeric.latlng.zoneinfo
