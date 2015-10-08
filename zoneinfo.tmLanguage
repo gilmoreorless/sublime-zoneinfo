@@ -77,7 +77,7 @@
 \s+([\w+\-\/]+)?  # Zone name
 \s+([\d:\-]+)     # UTC offset
 \s+([\w:\-]+)     # Rules
-\s+([\w%+\-\/]+)  # Format
+\s+([\w%+\-\/]+)?  # Format
 </string>
 			<key>name</key>
 			<string>meta.zone.zoneinfo</string>

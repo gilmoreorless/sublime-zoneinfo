@@ -36,12 +36,12 @@ patterns:
 - comment: Zone definitions
   name: meta.zone.zoneinfo
   match: |
-    (?x)
-    ^(Zone)?          # "Zone"
-    \s+([\w+\-\/]+)?  # Zone name
-    \s+([\d:\-]+)     # UTC offset
-    \s+([\w:\-]+)     # Rules
-    \s+([\w%+\-\/]+)  # Format
+    (?x)               # (extended format for regexp)
+    ^(Zone)?           # "Zone"
+    \s+([\w+\-\/]+)?   # Zone name
+    \s+([\d:\-]+)      # UTC offset
+    \s+([\w:\-]+)      # Rules
+    \s+([\w%+\-\/]+)?  # Format
   captures:
     '1': {name: storage.type.zone.zoneinfo}
     '2': {name: entity.name.zone.zoneinfo}
