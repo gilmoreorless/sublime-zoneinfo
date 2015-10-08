@@ -3,6 +3,7 @@
 name: zoneinfo
 scopeName: text.zoneinfo
 fileTypes:
+# The zoneinfo files have no extension, so just list their filenames
 - africa
 - antarctica
 - asia
@@ -12,10 +13,18 @@ fileTypes:
 - etcetera
 - europe
 - factory
+- leapseconds
 - northamerica
 - pacificnew
 - southamerica
 - systemv
+# These have generic extensions but are listed with full filenames
+# to avoid matching unrelated files in other projects
+- iso3166.tab
+- leap-seconds.list
+# - zone.tab
+# - zone1970.tab
+
 uuid: 6f25ec5b-a532-479a-841d-596ff7c820b3
 
 patterns:
@@ -32,7 +41,7 @@ patterns:
     \s+([\w+\-\/]+)?  # Zone name
     \s+([\d:\-]+)     # UTC offset
     \s+([\w:\-]+)     # Rules
-    \s+([\w%+\-]+)    # Format
+    \s+([\w%+\-\/]+)  # Format
   captures:
     '1': {name: storage.type.zone.zoneinfo}
     '2': {name: entity.name.zone.zoneinfo}
@@ -65,6 +74,17 @@ patterns:
   - include: '#comment'
   - include: '#zonename'
 
+- comment: Leap second definitions
+  name: meta.leap.zoneinfo
+  begin: ^(Leap)\b
+  beginCaptures:
+    '1': {name: storage.type.leap.zoneinfo}
+  end: $
+  patterns:
+  - include: '#comment'
+  - include: '#time'
+  - include: '#year'
+
 - comment: Time values
   name: constant.numeric.time.zoneinfo
   patterns:
@@ -84,7 +104,7 @@ repository:
     - include: '#url'
   url:
     name: string.other.link.zoneinfo
-    match: \b[A-Za-z]+:\/\/\S*?\.\S*\b
+    match: \b[A-Za-z]+:\/\/\S+?\.\S+?(?=[>\s\]])
   zonename:
     match: \b[\w+\-\/]+\b
     name: entity.name.zone.zoneinfo

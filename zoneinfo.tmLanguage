@@ -13,10 +13,13 @@
 		<string>etcetera</string>
 		<string>europe</string>
 		<string>factory</string>
+		<string>leapseconds</string>
 		<string>northamerica</string>
 		<string>pacificnew</string>
 		<string>southamerica</string>
 		<string>systemv</string>
+		<string>iso3166.tab</string>
+		<string>leap-seconds.list</string>
 	</array>
 	<key>name</key>
 	<string>zoneinfo</string>
@@ -72,7 +75,7 @@
 \s+([\w+\-\/]+)?  # Zone name
 \s+([\d:\-]+)     # UTC offset
 \s+([\w:\-]+)     # Rules
-\s+([\w%+\-]+)    # Format
+\s+([\w%+\-\/]+)  # Format
 </string>
 			<key>name</key>
 			<string>meta.zone.zoneinfo</string>
@@ -158,6 +161,39 @@
 			</array>
 		</dict>
 		<dict>
+			<key>begin</key>
+			<string>^(Leap)\b</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.leap.zoneinfo</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>Leap second definitions</string>
+			<key>end</key>
+			<string>$</string>
+			<key>name</key>
+			<string>meta.leap.zoneinfo</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#comment</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#time</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#year</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
 			<key>comment</key>
 			<string>Time values</string>
 			<key>name</key>
@@ -219,7 +255,7 @@
 		<key>url</key>
 		<dict>
 			<key>match</key>
-			<string>\b[A-Za-z]+:\/\/\S*?\.\S*\b</string>
+			<string>\b[A-Za-z]+:\/\/\S+?\.\S+?(?=[&gt;\s\]])</string>
 			<key>name</key>
 			<string>string.other.link.zoneinfo</string>
 		</dict>
