@@ -28,7 +28,13 @@ As well as associated metadata files:
 
 ## Installation
 
-Find it as **zoneinfo** through [Package Control](https://packagecontrol.io/).
+_**Soon**: Find it as **zoneinfo** through [Package Control](https://packagecontrol.io/) (pending PR approval)._
+
+**Right now:** Old-school manual installation:
+
+Find your package installation path with Sublime Text by selecting Preferences -> Browse Packages...
+
+Then open that directory in a terminal and run `git clone https://github.com/gilmoreorless/sublime-zoneinfo.git`
 
 ## Development
 
