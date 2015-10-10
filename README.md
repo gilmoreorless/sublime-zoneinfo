@@ -28,9 +28,11 @@ As well as associated metadata files:
 
 ## Installation
 
-_**Soon**: Find it as **zoneinfo** through [Package Control](https://packagecontrol.io/) (pending PR approval)._
+Find it as **[zoneinfo](https://packagecontrol.io/packages/zoneinfo)** through [Package Control](https://packagecontrol.io/).
 
-**Right now:** Old-school manual installation:
+---
+
+If you really want, you can use the old-school manual installation method (but using Package Control is easier):
 
 Find your package installation path with Sublime Text by selecting Preferences -> Browse Packages...
 
