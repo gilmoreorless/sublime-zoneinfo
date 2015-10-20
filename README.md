@@ -26,6 +26,10 @@ As well as associated metadata files:
 - zone.tab
 - zone1970.tab
 
+### Example screenshot
+
+![Preview of syntax highlighted file](preview.png)
+
 ## Installation
 
 Find it as **[zoneinfo](https://packagecontrol.io/packages/zoneinfo)** through [Package Control](https://packagecontrol.io/).
