@@ -127,7 +127,7 @@ repository:
     match: \b[A-Z]{2}\b
     name: variable.other.country.zoneinfo
   time:
-    match: \b-?((\d+(:\d+)+)|0\b)
+    match: -?\d+(:\d+)+|\b0\b
     name: constant.numeric.time.zoneinfo
   date:
     match: \b\d{4}(-\d{2}){2}\b

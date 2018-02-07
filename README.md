@@ -46,7 +46,7 @@ Then open that directory in a terminal and run `git clone https://github.com/gil
 
 ## Development
 
-All highlighting rules are defined in `zoneinfo.YAML-tmLanguage` using [YAML](http://en.wikipedia.org/wiki/YAML) syntax. The `zoneinfo.tmLanguage` file is auto-generated from the YAML using [AAAPackageDev](https://github.com/SublimeText/AAAPackageDev).
+All highlighting rules are defined in `zoneinfo.YAML-tmLanguage` using [YAML](http://en.wikipedia.org/wiki/YAML) syntax. The `zoneinfo.tmLanguage` file is auto-generated from the YAML using [PackageDev](https://github.com/SublimeText/PackageDev).
 
 For consistency, any changes to syntax highlighting made in this package should also be made in [vscode-zoneinfo](https://github.com/gilmoreorless/vscode-zoneinfo).
 
